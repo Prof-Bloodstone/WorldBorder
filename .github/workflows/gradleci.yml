@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - master
+      - develop
   pull_request:
     branches:
       - master
@@ -17,6 +18,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 30
+    - run: git fetch --tags && git describe --tags
     - name: Restore gradle cache
       uses: actions/cache@v1
       with:
