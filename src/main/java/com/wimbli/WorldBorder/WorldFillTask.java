@@ -249,7 +249,6 @@ public class WorldFillTask implements Runnable
 			if (!chunkOnUnloadPreventionList(unload.x, unload.z))
 			{
 				world.setChunkForceLoaded(unload.x, unload.z, false);
-				world.unloadChunkRequest(unload.x, unload.z);
 			}
 		}
 
