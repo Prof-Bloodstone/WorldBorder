@@ -26,7 +26,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          ./gradlew build
+          ./gradlew shadowJar
           mv -v build/libs/WorldBorder{-*,}.jar
       - name: Prepare release description
         id: prepare_release_description

@@ -35,7 +35,7 @@ jobs:
     - name: Check if is spotless
       run: ./gradlew spotlessCheck
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew shadowJar
     - name: Upload artifact if successful
       uses: actions/upload-artifact@v2
       if: ${{ success() }}
