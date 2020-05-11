@@ -245,11 +245,15 @@ public class WorldFillTask implements Runnable
     // The ChunkUnloadListener checks this anyway, but it doesn't hurt to
     // save a few µs by not even requesting the unload.
 
+    boolean isLowOnMemory = Config.AvailableMemoryTooLow();
     for (CoordXZ unload : chunksToUnload)
     {
       if (!chunkOnUnloadPreventionList(unload.x, unload.z))
       {
         world.setChunkForceLoaded(unload.x, unload.z, false);
+        if (isLowOnMemory){
+          world.unloadChunkRequest(unload.x, unload.z);
+        }
       }
     }
 
