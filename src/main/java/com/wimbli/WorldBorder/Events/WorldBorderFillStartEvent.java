@@ -1,3 +1,4 @@
+/* Licensed under BSD 3-Clause */
 package com.wimbli.WorldBorder.Events;
 
 import org.bukkit.event.Event;
@@ -11,26 +12,26 @@ import com.wimbli.WorldBorder.WorldFillTask;
  */
 public class WorldBorderFillStartEvent extends Event
 {
-	private static final HandlerList handlers = new HandlerList();
-	private WorldFillTask fillTask;
+  private static final HandlerList handlers = new HandlerList();
+  private WorldFillTask fillTask;
 
-	public WorldBorderFillStartEvent(WorldFillTask worldFillTask)
-	{
-		this.fillTask = worldFillTask;
-	}
+  public WorldBorderFillStartEvent(WorldFillTask worldFillTask)
+  {
+    this.fillTask = worldFillTask;
+  }
 
-	@Override
-	public HandlerList getHandlers()
-	{
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers()
+  {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList()
-	{
-		return handlers;
-	}
+  public static HandlerList getHandlerList()
+  {
+    return handlers;
+  }
 
-	public WorldFillTask getFillTask(){
-		return this.fillTask;
-	}
+  public WorldFillTask getFillTask(){
+    return this.fillTask;
+  }
 }

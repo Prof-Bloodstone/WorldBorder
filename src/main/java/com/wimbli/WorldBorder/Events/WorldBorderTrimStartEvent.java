@@ -1,3 +1,4 @@
+/* Licensed under BSD 3-Clause */
 package com.wimbli.WorldBorder.Events;
 
 import org.bukkit.event.Event;
@@ -11,26 +12,26 @@ import com.wimbli.WorldBorder.WorldTrimTask;
  */
 public class WorldBorderTrimStartEvent extends Event
 {
-	private static final HandlerList handlers = new HandlerList();
-	private WorldTrimTask trimTask;
+  private static final HandlerList handlers = new HandlerList();
+  private WorldTrimTask trimTask;
 
-	public WorldBorderTrimStartEvent(WorldTrimTask trimTask)
-	{
-		this.trimTask = trimTask;
-	}
+  public WorldBorderTrimStartEvent(WorldTrimTask trimTask)
+  {
+    this.trimTask = trimTask;
+  }
 
-	@Override
-	public HandlerList getHandlers()
-	{
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers()
+  {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList()
-	{
-		return handlers;
-	}
+  public static HandlerList getHandlerList()
+  {
+    return handlers;
+  }
 
-	public WorldTrimTask getTrimTask(){
-		return this.trimTask;
-	}
+  public WorldTrimTask getTrimTask(){
+    return this.trimTask;
+  }
 }

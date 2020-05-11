@@ -32,6 +32,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Check if is spotless
+      run: ./gradlew spotlessCheck
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload artifact if successful

@@ -1,7 +1,8 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'java'
+  id 'java'
+  id "com.diffplug.gradle.spotless" version "3.29.0"
 }
 
 version = ['git', 'describe', '--tags', '--match', 'v*'].execute().text.trim().substring(1)
@@ -10,41 +11,59 @@ group = 'com.wimbli.WorldBorder'
 sourceCompatibility = '1.8'
 
 repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://hub.spigotmc.org/nexus/content/groups/public/')
-    }
+  mavenLocal()
+  maven {
+    url = uri('https://hub.spigotmc.org/nexus/content/groups/public/')
+  }
 
-    maven {
-        url = uri('https://repo.mikeprimm.com/')
-    }
+  maven {
+    url = uri('https://repo.mikeprimm.com/')
+  }
 
-    maven {
-        url = uri('https://papermc.io/repo/repository/maven-public/')
-    }
+  maven {
+    url = uri('https://papermc.io/repo/repository/maven-public/')
+  }
 
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2')
-    }
+  maven {
+    url = uri('https://repo.maven.apache.org/maven2')
+  }
 }
 
 dependencies {
-    implementation 'io.papermc:paperlib:1.0.2'
-    compileOnly 'org.spigotmc:spigot-api:1.14-R0.1-SNAPSHOT'
-    compileOnly 'org.bukkit:bukkit:1.14-R0.1-SNAPSHOT'
-    compileOnly 'us.dynmap:dynmap-api:2.5'
+  implementation 'io.papermc:paperlib:1.0.2'
+  compileOnly 'org.spigotmc:spigot-api:1.14-R0.1-SNAPSHOT'
+  compileOnly 'org.bukkit:bukkit:1.14-R0.1-SNAPSHOT'
+  compileOnly 'us.dynmap:dynmap-api:2.5'
 }
 
 /* This will replace '@VERSION@' in the plugin.yml with the version declared above, just put '@VERSION@' for the version in the plugin.yml */
 processResources {
-    filesMatching('**/*.yml') {
-        filter ReplaceTokens, tokens: [
-            "VERSION": project.property("version"),
-            "DESCRIPTION": project.property("description"),
-        ]
-    }
+  filesMatching('**/*.yml') {
+    filter ReplaceTokens, tokens: [
+      "VERSION": project.property("version"),
+      "DESCRIPTION": project.property("description"),
+    ]
+  }
+}
+
+spotless {
+  format 'misc', {
+    target '**/*.gradle', '**/*.md', '**/.gitignore'
+
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
+  java {
+    licenseHeader '/* Licensed under BSD 3-Clause */'
+    importOrder 'java', 'javax', 'org', 'com', 'com.diffplug', ''	// A sequence of package names
+    removeUnusedImports()
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+  options.encoding = 'UTF-8'
 }
